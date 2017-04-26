@@ -1,0 +1,14 @@
+/Filters.class
+/Module.class
+/application.conf
+/autenticadores/
+/controllers/
+/daos/
+/evolutions/
+/filters/
+/logback.xml
+/models/
+/routes
+/services/
+/validadores/
+/views/

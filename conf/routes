@@ -1,0 +1,10 @@
+GET     /usuario/novo               	   controllers.UsuarioController.formularioDeNovoUsuario
+POST    /usuario/novo               	   controllers.UsuarioController.salvaNovoUsuario
+GET     /usuario/confirma/:email/:codigo   controllers.UsuarioController.confirmaUsuario(email, codigo)
+GET     /usuario/painel       			   controllers.UsuarioController.painel
+
+GET     /login                      controllers.UsuarioController.formularioDeLogin
+POST    /login                      controllers.UsuarioController.fazLogin
+GET     /logout                     controllers.UsuarioController.fazLogout
+
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
