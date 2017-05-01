@@ -36,6 +36,14 @@ public class Tarefa extends Model{
 	@OneToMany(mappedBy = "tarefa")
 	private List<Tag> tags;
 
+	public Tarefa(String descricao, Usuario responsavel, Usuario membro) {
+		this.descricao = descricao;
+		this.responsavel = responsavel;
+		this.membro = membro;
+		this.criacao = LocalDate.now();
+		
+		this.timeTracking = new TimeTracking();
+	}
 	public List<Tag> getTags() {
 		return tags;
 	}
@@ -44,14 +52,6 @@ public class Tarefa extends Model{
 	}
 	public void setTimeTracking(TimeTracking timeTracking) {
 		this.timeTracking = timeTracking;
-	}
-	public Tarefa(String descricao, Usuario responsavel, Usuario membro) {
-		this.descricao = descricao;
-		this.responsavel = responsavel;
-		this.membro = membro;
-		this.criacao = LocalDate.now();
-		
-		this.timeTracking = new TimeTracking();
 	}
 	public String getTitulo() {
 		return titulo;

@@ -11,7 +11,7 @@ public class PessoaUsuario {
 	@Email
 	@Required(message = "Você precisa fornecer o E-mail!")
 	public String email;	
-	public StatusPessoa status;
+	public Status status;
 	public LocalDate dataCadastro; 
 
 	@Required(message = "Você precisa fornecer uma senha")
@@ -33,11 +33,11 @@ public class PessoaUsuario {
 		this.email = email;
 	}
 
-	public StatusPessoa getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusPessoa status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 

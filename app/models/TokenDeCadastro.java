@@ -21,8 +21,7 @@ public class TokenDeCadastro extends Model {
 	
 	public TokenDeCadastro(Usuario usuario) {
 		this.usuario = usuario;
-		Pessoa pessoaUsuario = usuario.getPessoa();
-		this.codigo = Crypt.sha1(pessoaUsuario.getNome()+pessoaUsuario.getEmail()+Crypt.generateSecureCookie());		
+		this.codigo = Crypt.sha1(usuario.getNome()+usuario.getEmail()+Crypt.generateSecureCookie());		
 	}
 	public Long getId() {
 		return id;

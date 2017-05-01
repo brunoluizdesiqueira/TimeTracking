@@ -6,15 +6,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import play.data.validation.Constraints.Required;
 
 @Entity
 public class Cliente {
 	@Id
 	@GeneratedValue
 	private long id;
-	@OneToOne
-	private Pessoa pessoa;	
+	
+	@Required(message = "Você precisa fornecer um nome!")
+	private String nome;
+	
 	@OneToMany(mappedBy = "cliente")
 	private List<Projeto> projetos;	
 
@@ -22,14 +24,17 @@ public class Cliente {
 		this.projetos = new ArrayList<Projeto>();				
 		this.setProjeto(projeto);
 	}
-	public List<Projeto> getAllProjetos() {
-		return projetos;
-	}
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	public List<Projeto> getProjetos() {
 		return projetos;
@@ -47,11 +52,5 @@ public class Cliente {
 	}
 	public void setProjeto(Projeto projeto) {
 		this.projetos.add(projeto);
-	}
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
 	}
 }

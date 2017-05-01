@@ -1,6 +1,6 @@
 package models;
 
-public enum StatusPessoa {
+public enum Status {
 	ATIVO,
 	INATIVO;
 }

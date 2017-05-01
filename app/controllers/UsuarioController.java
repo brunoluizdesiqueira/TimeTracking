@@ -8,7 +8,6 @@ import autenticadores.UsuarioAutenticado;
 import daos.TokenDeCadastroDAO;
 import daos.UsuarioDAO;
 import models.EmailDeCadastro;
-import models.Pessoa;
 import models.PessoaUsuario;
 import models.TokenDaApi;
 import models.TokenDeCadastro;
@@ -19,7 +18,7 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.*;
 import play.mvc.Security.Authenticated;
-import validadores.ValidadorDePessoaUsuario;
+import validadores.ValidadorDeUsuario;
 import views.html.*;
 
 public class UsuarioController extends Controller {
@@ -30,34 +29,26 @@ public class UsuarioController extends Controller {
 	@Inject
 	private MailerClient enviador;
 	@Inject 
-	private ValidadorDePessoaUsuario validadorDePessoaUsuario;
+	private ValidadorDeUsuario validadorDePessoaUsuario;
 	@Inject
 	private UsuarioDAO usuarioDAO;
 	@Inject
 	private TokenDeCadastroDAO tokenDeCadastroDAO;
 	
 	public Result formularioDeNovoUsuario() {
-		Form<PessoaUsuario> formulario = formularios.form(PessoaUsuario.class);
+		Form<Usuario> formulario = formularios.form(Usuario.class);
 		return ok(formularioDeNovoUsuario.render(formulario));
 	}	
 	public Result salvaNovoUsuario() {
-		Form<PessoaUsuario> formulario = formularios.form(PessoaUsuario.class).bindFromRequest();	
+		Form<Usuario> formulario = formularios.form(Usuario.class).bindFromRequest();	
 		
 		if (validadorDePessoaUsuario.temErros(formulario)) {
 			flash("danger", "Há erros no formulário de cadastro!");			
 			return badRequest(formularioDeNovoUsuario.render(formulario));	
 		}
-	
-		PessoaUsuario pessoaUsuario = formulario.get();		
-		Pessoa pessoa = new Pessoa();
-		pessoa.setNome(pessoaUsuario.getNome());
-		pessoa.setEmail(pessoaUsuario.getEmail());
-		pessoa.save();
 		
-		Usuario usuario = new Usuario();
-		usuario.setSenha(pessoaUsuario.getSenha());
+		Usuario usuario = formulario.get();	
 		usuario.setSenha(Crypt.sha1(usuario.getSenha()));
-        usuario.setPessoa(pessoa);
 		usuario.save();
 		
 		TokenDeCadastro token = new TokenDeCadastro(usuario);

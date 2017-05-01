@@ -12,14 +12,14 @@ public class UsuarioDAO {
 	public Optional<Usuario> comEmail(String email) {
 		Usuario usuario = usuarios.
 				where().
-				eq("pessoa.email", email).
+				eq("email", email).
 				findUnique();
 
 		return Optional.ofNullable(usuario);
 	}
 
 	public Optional<Usuario> comEmailESenha(String email, String senha) {
-		Usuario usuario = usuarios.where().eq("pessoa.email", email).eq("senha", senha).findUnique();
+		Usuario usuario = usuarios.where().eq("email", email).eq("senha", senha).findUnique();
 		return Optional.ofNullable(usuario);
 	}
 

@@ -14,9 +14,12 @@ public class RegistroDeAcesso extends Model {
 	@Id
 	@GeneratedValue
 	private long id;
+
 	@ManyToOne
 	private Usuario usuario;
+
 	private String uri;
+	
 	private Date data;
 	
 	public RegistroDeAcesso(Usuario usuario, String uri) {

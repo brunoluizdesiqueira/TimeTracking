@@ -23,7 +23,7 @@ public class UsuarioAutenticado extends Authenticator {
 		if (possivelUsuario.isPresent()) {
 			Usuario usuario = possivelUsuario.get();
 			context.args.put("usuario", usuario);
-			return usuario.getPessoa().getNome();
+			return usuario.getNome();
 		}
 		return null;
 	}
