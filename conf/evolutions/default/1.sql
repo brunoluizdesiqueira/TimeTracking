@@ -6,6 +6,9 @@
 create table cliente (
   id                            bigint auto_increment not null,
   nome                          varchar(255),
+  data_cadastro                 date,
+  status                        varchar(7),
+  constraint ck_cliente_status check (status in ('ATIVO','INATIVO')),
   constraint pk_cliente primary key (id)
 );
 
@@ -17,6 +20,7 @@ create table pessoa (
 create table projeto (
   id                            bigint auto_increment not null,
   nome                          varchar(255),
+  descricao                     varchar(500),
   cliente_id                    bigint,
   constraint uq_projeto_cliente_id unique (cliente_id),
   constraint pk_projeto primary key (id)

@@ -1,26 +1,38 @@
 package models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import com.avaje.ebean.Model;
+
 import play.data.validation.Constraints.Required;
 
 @Entity
-public class Cliente {
+public class Cliente extends Model{
 	@Id
 	@GeneratedValue
 	private long id;
 	
 	@Required(message = "Você precisa fornecer um nome!")
 	private String nome;
+
+	private LocalDate dataCadastro = LocalDate.now();
+
+	@Enumerated(EnumType.STRING)
+	private Status status = Status.ATIVO;
 	
 	@OneToMany(mappedBy = "cliente")
 	private List<Projeto> projetos;	
 
 	public Cliente(Projeto projeto) {
+		this.dataCadastro = LocalDate.now();
+		this.status = Status.ATIVO;
 		this.projetos = new ArrayList<Projeto>();				
 		this.setProjeto(projeto);
 	}
@@ -52,5 +64,11 @@ public class Cliente {
 	}
 	public void setProjeto(Projeto projeto) {
 		this.projetos.add(projeto);
+	}
+	public LocalDate getDataCadastro() {
+		return dataCadastro;
+	}
+	public void setDataCadastro(LocalDate dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 }

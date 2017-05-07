@@ -8,7 +8,6 @@ import autenticadores.UsuarioAutenticado;
 import daos.TokenDeCadastroDAO;
 import daos.UsuarioDAO;
 import models.EmailDeCadastro;
-import models.PessoaUsuario;
 import models.TokenDaApi;
 import models.TokenDeCadastro;
 import models.Usuario;
@@ -29,7 +28,7 @@ public class UsuarioController extends Controller {
 	@Inject
 	private MailerClient enviador;
 	@Inject 
-	private ValidadorDeUsuario validadorDePessoaUsuario;
+	private ValidadorDeUsuario validadorDeUsuario;
 	@Inject
 	private UsuarioDAO usuarioDAO;
 	@Inject
@@ -42,7 +41,7 @@ public class UsuarioController extends Controller {
 	public Result salvaNovoUsuario() {
 		Form<Usuario> formulario = formularios.form(Usuario.class).bindFromRequest();	
 		
-		if (validadorDePessoaUsuario.temErros(formulario)) {
+		if (validadorDeUsuario.temErros(formulario)) {
 			flash("danger", "Há erros no formulário de cadastro!");			
 			return badRequest(formularioDeNovoUsuario.render(formulario));	
 		}
@@ -83,7 +82,6 @@ public class UsuarioController extends Controller {
 		}	
 	    return redirect(routes.UsuarioController.formularioDeLogin());
 	}
-	
 	public Result confirmaUsuario(String email, String codigo) {
 		Optional<Usuario> possivelUsuario = usuarioDAO.comEmail(email);
 		Optional<TokenDeCadastro> possivelToken = tokenDeCadastroDAO.comCodigo(codigo);

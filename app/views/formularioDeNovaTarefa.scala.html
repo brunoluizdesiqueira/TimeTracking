@@ -1,0 +1,10 @@
+@(formulario: Form[Tarefa])
+@import b3.vertical.fieldConstructor;
+@main("Cadastro de tarefa") {
+  @b3.form(routes.TarefaController.salvaNovaTarefa) {
+  	<h1>Cadastre uma nova tarefa</h1>
+  	@b3.text(formulario("titulo"),'_label -> "Título", 'placeholder -> "Criação binding do XSD da NF-e 4.0")	
+		@b3.textarea(formulario("descricao"),'_label -> "Descrição", 'placeholder -> "Descreva o que devera ser realizado através desta tarefa.")	
+  	@b3.submit('class -> "btn btn-primary") { Cadastrar }
+  }
+} 
