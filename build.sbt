@@ -12,6 +12,7 @@ libraryDependencies ++= Seq(
   javaWs,
   "mysql" % "mysql-connector-java" % "5.1.36",
   "com.adrianhurt" % "play-bootstrap_2.11" % "1.0-P25-B3",
+  "org.webjars" % "bootstrap-datepicker" % "1.4.0",
   "com.typesafe.play" % "play-mailer_2.11" % "5.0.0-M1",
   "com.feth" % "play-authenticate_2.11" % "0.8.3"
 )

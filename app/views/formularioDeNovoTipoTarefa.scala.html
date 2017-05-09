@@ -1,0 +1,10 @@
+@(formulario: Form[TipoTarefa])
+@import b3.vertical.fieldConstructor;
+    @main("Cadastro de Tipos de tarefa") {
+        @b3.form(routes.TipoTarefaController.salvaNovoTipoTarefa()) {
+            <h1>Cadastre um novo tipo de tarefa</h1>
+            @b3.text(formulario("nome"), '_label -> "Nome", 'placeholder -> "Ex: Refatoração")
+            @b3.text(formulario("tempoEstimado"), '_label -> "Tempo estimado", 'placeholder -> "37:00")
+            @b3.submit('class -> "btn btn-primary") { Cadastrar }
+        }
+}

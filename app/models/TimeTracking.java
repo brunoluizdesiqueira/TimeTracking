@@ -1,15 +1,12 @@
 package models;
 
+import com.avaje.ebean.Model;
+import models.enumeradores.TipoTransicao;
+
+import javax.persistence.*;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import com.avaje.ebean.Model;
 
 /**
  * @author Bruno

@@ -3,17 +3,21 @@ POST    /usuario/novo               	   controllers.UsuarioController.salvaNovoU
 GET     /usuario/confirma/:email/:codigo   controllers.UsuarioController.confirmaUsuario(email, codigo)
 GET     /usuario/painel       			   controllers.UsuarioController.painel
 
-GET     /login                      controllers.UsuarioController.formularioDeLogin
-POST    /login                      controllers.UsuarioController.fazLogin
-GET     /logout                     controllers.UsuarioController.fazLogout
+GET     /login_                    controllers.UsuarioController.formularioDeLoginTeste
+GET     /login                     controllers.UsuarioController.formularioDeLogin
+POST    /login                     controllers.UsuarioController.fazLogin
+GET     /logout                    controllers.UsuarioController.fazLogout
 
-GET    /cliente/novo                controllers.ClienteController.formularioDeNovoCliente
-POST   /cliente/novo                controllers.ClienteController.salvaNovoCliente  
+GET    /cliente/novo               controllers.ClienteController.formularioDeNovoCliente
+POST   /cliente/novo               controllers.ClienteController.salvaNovoCliente
         
-GET    /projeto/novo                controllers.ProjetoController.formularioDeNovoProjeto
-POST   /projeto/novo                controllers.ProjetoController.salvaNovoProjeto
+GET    /projeto/novo               controllers.ProjetoController.formularioDeNovoProjeto
+POST   /projeto/novo               controllers.ProjetoController.salvaNovoProjeto
 
 GET    /tarefa/novo                controllers.TarefaController.formularioDeNovaTarefa
 POST   /tarefa/novo                controllers.TarefaController.salvaNovaTarefa
+
+GET    /tipotarefa/novo            controllers.TipoTarefaController.formularioDeNovoTipoTarefa
+POST   /tipotarefa/novo            controllers.TipoTarefaController.salvaNovoTipoTarefa
 
 GET     /assets/*file              controllers.Assets.versioned(path="/public", file: Asset)

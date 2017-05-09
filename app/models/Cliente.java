@@ -1,32 +1,23 @@
 package models;
 
+import com.avaje.ebean.Model;
+import models.enumeradores.Status;
+import play.data.validation.Constraints.Required;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import com.avaje.ebean.Model;
-
-import play.data.validation.Constraints.Required;
 
 @Entity
 public class Cliente extends Model{
 	@Id
 	@GeneratedValue
 	private long id;
-	
 	@Required(message = "Você precisa fornecer um nome!")
 	private String nome;
-
 	private LocalDate dataCadastro = LocalDate.now();
-
 	@Enumerated(EnumType.STRING)
 	private Status status = Status.ATIVO;
-	
 	@OneToMany(mappedBy = "cliente")
 	private List<Projeto> projetos;	
 

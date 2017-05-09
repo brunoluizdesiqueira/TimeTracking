@@ -1,32 +1,24 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import com.avaje.ebean.Model;
 import play.data.validation.Constraints.Required;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Projeto extends Model {
 	@Id
 	@GeneratedValue
 	private long id;
-
 	@Required(message = "Você precisa fornecer um nome do projeto!")
 	private String nome;
-
 	@Required(message = "Você precisa fornecer uma descrição para o projeto")
 	@Column(length=500)
 	private String descricao;
-
 	@OneToMany(mappedBy = "projeto")
 	private List<Tarefa> tarefas;
-	
 	@OneToOne
 	private Cliente cliente;
 
@@ -37,7 +29,6 @@ public class Projeto extends Model {
 		this.id = id;
 	}
 	public Projeto(String nome) {
-		super();
 		this.tarefas = new ArrayList<Tarefa>();
 		this.nome = nome;
 	}

@@ -1,20 +1,17 @@
 package daos;
 
-import java.util.List;
-import java.util.Optional;
 import com.avaje.ebean.Model.Finder;
 import models.Cliente;
+
+import java.util.List;
+import java.util.Optional;
 
 public class ClienteDAO {
 
 	private Finder<Long, Cliente> clientes = new Finder<>(Cliente.class);
 	
     public Optional<Cliente> comId(Long id) {
-		Cliente cliente = clientes.
-				where().
-				eq("id", id).
-				findUnique();
-
+		Cliente cliente = clientes.byId(id);
 		return Optional.ofNullable(cliente);
 	}
 	public Optional<Cliente> comNome(String nome) {
@@ -28,5 +25,4 @@ public class ClienteDAO {
 	public List<Cliente> todos() {
 		return clientes.all();
 	}
-
 }

@@ -1,10 +1,10 @@
 package daos;
 
-import java.util.Optional;
-
 import com.avaje.ebean.Model.Finder;
-
 import models.TokenDeCadastro;
+
+import java.util.List;
+import java.util.Optional;
 
 public class TokenDeCadastroDAO {
 
@@ -14,5 +14,7 @@ public class TokenDeCadastroDAO {
 		TokenDeCadastro tokenDeCadastro = tokens.where().eq("codigo", codigo).findUnique();
 		return Optional.ofNullable(tokenDeCadastro);
 	}
-
+	public List<TokenDeCadastro> todos() {
+		return tokens.all();
+	}
 }

@@ -1,9 +1,10 @@
 package daos;
 
-import java.util.List;
-import java.util.Optional;
 import com.avaje.ebean.Model.Finder;
 import models.Usuario;
+
+import java.util.List;
+import java.util.Optional;
 
 public class UsuarioDAO {
 
@@ -17,17 +18,14 @@ public class UsuarioDAO {
 
 		return Optional.ofNullable(usuario);
 	}
-
 	public Optional<Usuario> comEmailESenha(String email, String senha) {
 		Usuario usuario = usuarios.where().eq("email", email).eq("senha", senha).findUnique();
 		return Optional.ofNullable(usuario);
 	}
-
 	public Optional<Usuario> comToken(String codigo) {
 		Usuario usuario = usuarios.where().eq("token.codigo", codigo).findUnique();
 		return Optional.ofNullable(usuario);
 	}
-
 	public List<Usuario> todos() {
 		return usuarios.all();
 	}

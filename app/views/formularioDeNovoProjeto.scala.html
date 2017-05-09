@@ -4,9 +4,9 @@
   @b3.form(routes.ProjetoController.salvaNovoProjeto) {
   	<h1>Cadastre um novo projeto</h1>
   	@b3.text(formulario("nome"),'_label -> "Nome", 'placeholder -> "Emissor de nota fiscal eletrônica...")	
-		@b3.textarea(formulario("descricao"),'_label -> "Descrição", 'placeholder -> "Criação do aplicativo de emissão de NF-e...")	
+	@b3.textarea(formulario("descricao"),'_label -> "Descrição", 'placeholder -> "Criação do aplicativo de emissão de NF-e...")
 
-	  <label class="control-label" for="cliente_id">Selecione o cliente</label>  	  
+	<label class="control-label" for="cliente_id">Selecione o cliente</label>
   	<select name="cliente_id" label="Selecione o cliente" class="form-control placeholder">
     	<option selected disabled value="">Selecione um cliente...</option>
 		@for(cliente <- clientes) {

@@ -1,63 +1,43 @@
 package models;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import com.avaje.ebean.Model;
+import models.enumeradores.Papel;
+import models.enumeradores.Status;
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Usuario extends Model{
 	@Id
 	@GeneratedValue
 	private long id;
-
 	@Required(message = "Você precisa fornecer um nome!")
 	private String nome;
-	
 	@Email
 	@Required(message = "Você precisa fornecer um e-mail!")
 	private String email;
-
 	@Required(message = "Você precisa fornecer uma senha")
 	private String senha;
-
 	@Enumerated(EnumType.STRING)
 	private Status status = Status.ATIVO;
-
 	private boolean verificado;
-	
 	@Required(message = "Você precisa fornecer a data de cadastro!")
 	private LocalDate dataCadastro = LocalDate.now();
-
-	private String AvatarURL; 
-
-	@OneToOne
-	private Pessoa pessoa;
-
+	private String AvatarURL;
 	@OneToOne(mappedBy = "usuario")
 	private TokenDaApi token;
-
 	@OneToMany(mappedBy = "usuario")
 	private List<RegistroDeAcesso> acessos;
-
 	@Enumerated(EnumType.STRING)
     private Papel papel = Papel.COLABORADOR;
-
 	@OneToOne(mappedBy = "responsavel")
 	private Tarefa tarefa_responsavel;
-
 	@OneToOne(mappedBy = "membro")
 	private Tarefa tarefa_Membro;
-
 	@OneToOne(mappedBy = "usuarioParecer")
 	private TimeLine timeLine;
 
@@ -96,12 +76,6 @@ public class Usuario extends Model{
 	}
 	public long getId() {
 		return id;
-	}
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
 	}
 	public Tarefa getTarefa_responsavel() {
 		return tarefa_responsavel;

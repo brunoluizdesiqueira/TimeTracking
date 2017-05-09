@@ -1,21 +1,15 @@
 package models;
 
+import com.avaje.ebean.Model;
+import models.enumeradores.TipoTransicao;
+
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import com.avaje.ebean.Model;
 
 /**
  * Classe responsável por registrar o momento em que ocorre cada transição

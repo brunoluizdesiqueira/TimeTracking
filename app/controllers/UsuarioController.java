@@ -1,8 +1,5 @@
 package controllers;
 
-import java.util.Optional;
-
-import javax.inject.Inject;
 import akka.util.Crypt;
 import autenticadores.UsuarioAutenticado;
 import daos.TokenDeCadastroDAO;
@@ -15,10 +12,16 @@ import play.api.libs.mailer.MailerClient;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.data.FormFactory;
-import play.mvc.*;
+import play.mvc.Controller;
+import play.mvc.Result;
 import play.mvc.Security.Authenticated;
 import validadores.ValidadorDeUsuario;
-import views.html.*;
+import views.html.formularioDeLogin;
+import views.html.formularioDeLoginTeste;
+import views.html.formularioDeNovoUsuario;
+
+import javax.inject.Inject;
+import java.util.Optional;
 
 public class UsuarioController extends Controller {
 	
@@ -33,8 +36,8 @@ public class UsuarioController extends Controller {
 	private UsuarioDAO usuarioDAO;
 	@Inject
 	private TokenDeCadastroDAO tokenDeCadastroDAO;
-	
-	public Result formularioDeNovoUsuario() {
+
+    public Result formularioDeNovoUsuario() {
 		Form<Usuario> formulario = formularios.form(Usuario.class);
 		return ok(formularioDeNovoUsuario.render(formulario));
 	}	
@@ -59,6 +62,9 @@ public class UsuarioController extends Controller {
 	}
 	public Result formularioDeLogin() {
 	    return ok(formularioDeLogin.render(formularios.form()));
+	}
+	public Result formularioDeLoginTeste() {
+		return ok(formularioDeLoginTeste.render(formularios.form()));
 	}
 	public Result fazLogin() {
 		DynamicForm formulario = formularios.form().bindFromRequest();

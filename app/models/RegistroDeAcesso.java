@@ -1,25 +1,21 @@
 package models;
 
-import java.util.Date;
+import com.avaje.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import com.avaje.ebean.Model;
+import java.util.Date;
 
 @Entity
 public class RegistroDeAcesso extends Model {
 	@Id
 	@GeneratedValue
 	private long id;
-
 	@ManyToOne
 	private Usuario usuario;
-
 	private String uri;
-	
 	private Date data;
 	
 	public RegistroDeAcesso(Usuario usuario, String uri) {
