@@ -1,17 +1,11 @@
 package models;
 
+import com.avaje.ebean.Model;
+import play.data.validation.Constraints.Required;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
-import com.avaje.ebean.Model;
-
-import play.data.validation.Constraints.Required;
 
 @Entity
 public class Tarefa extends Model{
@@ -28,7 +22,7 @@ public class Tarefa extends Model{
 	private Usuario responsavel;
 	@OneToOne
 	private Usuario membro;
-	private LocalDate criacao;
+	private LocalDate criacao = LocalDate.now();
 	@OneToOne
 	private TimeTracking timeTracking;
 	@ManyToOne
@@ -40,8 +34,6 @@ public class Tarefa extends Model{
 		this.descricao = descricao;
 		this.responsavel = responsavel;
 		this.membro = membro;
-		this.criacao = LocalDate.now();
-		
 		this.timeTracking = new TimeTracking();
 	}
 	public List<Tag> getTags() {

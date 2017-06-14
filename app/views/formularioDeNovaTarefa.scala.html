@@ -1,10 +1,68 @@
-@(formulario: Form[Tarefa])
+@(formulario: Form[Tarefa], form: Form[Projeto], clientes: List[Cliente], tipos: List[TipoTarefa], projetos: List[Projeto], responsaveis: List[Usuario], membros: List[Usuario])
 @import b3.vertical.fieldConstructor;
 @main("Cadastro de tarefa") {
   @b3.form(routes.TarefaController.salvaNovaTarefa) {
   	<h1>Cadastre uma nova tarefa</h1>
-  	@b3.text(formulario("titulo"),'_label -> "Título", 'placeholder -> "Criação binding do XSD da NF-e 4.0")	
-		@b3.textarea(formulario("descricao"),'_label -> "Descrição", 'placeholder -> "Descreva o que devera ser realizado através desta tarefa.")	
+  	  @b3.text(formulario("titulo"),'_label -> "Título", 'placeholder -> "Criação binding do XSD da NF-e 4.0")
+	  @b3.textarea(formulario("descricao"),'_label -> "Descrição", 'placeholder -> "Descreva o que devera ser realizado através desta tarefa.")
+
+      <div class="form-group">
+          <label class="control-label" for="projeto_id">Selecione o projeto</label>
+          <div class="input-group">
+              <select name="projeto_id" label="Selecione o projeto" class="form-control placeholder">
+                  <option selected disabled value="">Selecione um projeto...</option>
+                  @for(projeto <- projetos) {
+                      <option value="@projeto.getId()">@projeto.getNome()</option>
+                  }
+              </select>
+              <span class="input-group-btn">
+                  <a href="" class="btn btn-info" data-toggle="modal" data-target="#myModal" value="Cadastrar" >
+                      <span class="glyphicon glyphicon-new-window"></span>
+                  </a>
+                  @for(projeto <- projetos) {
+                      <option value="@projeto.getId()">@projeto.getNome()</option>
+                  }
+              </span>
+          </div>
+      </div>
+      <br>
+      <label class="control-label" for="projeto_id">Selecione o responsável</label>
+      <select name="responsavel_id" label="Selecione o respons'vel" class="form-control placeholder">
+          <option selected disabled value="">Selecione um responsável...</option>
+          @for(responsavel <- responsaveis) {
+              <option value="@responsavel.getId()">@responsavel.getNome()</option>
+          }
+      </select>
+      <br>
+	  <label class="control-label" for="tipoTarefa_id">Selecione o tipo</label>
+	  <select name="tipoTarefa_id" label="Selecione o tipo" class="form-control placeholder">
+		  <option selected disabled value="">Selecione um tipo...</option>
+		  @for(tipo <- tipos) {
+			  <option value="@tipo.getId()">@tipo.getNome()</option>
+		  }
+	  </select>
+      <br>
+
   	@b3.submit('class -> "btn btn-primary") { Cadastrar }
+
+          <!-- Modal -->
+      <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+                  <!-- Modal content-->
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Título do modal</h4>
+                  </div>
+                  <div class="modal-body">
+                      <p>Entre com o conteudo deste modal.</p>
+                      @formularioDeNovoProjeto(form, clientes)
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
   }
 } 

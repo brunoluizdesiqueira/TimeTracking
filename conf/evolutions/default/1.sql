@@ -12,17 +12,11 @@ create table cliente (
   constraint pk_cliente primary key (id)
 );
 
-create table pessoa (
-  id                            bigint auto_increment not null,
-  constraint pk_pessoa primary key (id)
-);
-
 create table projeto (
   id                            bigint auto_increment not null,
   nome                          varchar(255),
   descricao                     varchar(500),
   cliente_id                    bigint,
-  constraint uq_projeto_cliente_id unique (cliente_id),
   constraint pk_projeto primary key (id)
 );
 
@@ -108,15 +102,14 @@ create table usuario (
   verificado                    tinyint(1) default 0,
   data_cadastro                 date,
   avatar_url                    varchar(255),
-  pessoa_id                     bigint,
   papel                         varchar(11),
   constraint ck_usuario_status check (status in ('ATIVO','INATIVO')),
   constraint ck_usuario_papel check (papel in ('CLIENTE','COLABORADOR','ADMIN')),
-  constraint uq_usuario_pessoa_id unique (pessoa_id),
   constraint pk_usuario primary key (id)
 );
 
 alter table projeto add constraint fk_projeto_cliente_id foreign key (cliente_id) references cliente (id) on delete restrict on update restrict;
+create index ix_projeto_cliente_id on projeto (cliente_id);
 
 alter table registro_de_acesso add constraint fk_registro_de_acesso_usuario_id foreign key (usuario_id) references usuario (id) on delete restrict on update restrict;
 create index ix_registro_de_acesso_usuario_id on registro_de_acesso (usuario_id);
@@ -144,12 +137,11 @@ alter table token_da_api add constraint fk_token_da_api_usuario_id foreign key (
 
 alter table token_de_cadastro add constraint fk_token_de_cadastro_usuario_id foreign key (usuario_id) references usuario (id) on delete restrict on update restrict;
 
-alter table usuario add constraint fk_usuario_pessoa_id foreign key (pessoa_id) references pessoa (id) on delete restrict on update restrict;
-
 
 # --- !Downs
 
 alter table projeto drop foreign key fk_projeto_cliente_id;
+drop index ix_projeto_cliente_id on projeto;
 
 alter table registro_de_acesso drop foreign key fk_registro_de_acesso_usuario_id;
 drop index ix_registro_de_acesso_usuario_id on registro_de_acesso;
@@ -177,11 +169,7 @@ alter table token_da_api drop foreign key fk_token_da_api_usuario_id;
 
 alter table token_de_cadastro drop foreign key fk_token_de_cadastro_usuario_id;
 
-alter table usuario drop foreign key fk_usuario_pessoa_id;
-
 drop table if exists cliente;
-
-drop table if exists pessoa;
 
 drop table if exists projeto;
 
