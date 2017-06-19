@@ -15,47 +15,51 @@
                       <option value="@projeto.getId()">@projeto.getNome()</option>
                   }
               </select>
+
               <span class="input-group-btn">
-                  <a href="" class="btn btn-info" data-toggle="modal" data-target="#myModal" value="Cadastrar" >
+                  <a href="" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="Cadastrar" >
                       <span class="glyphicon glyphicon-new-window"></span>
                   </a>
-                  @for(projeto <- projetos) {
-                      <option value="@projeto.getId()">@projeto.getNome()</option>
-                  }
               </span>
           </div>
       </div>
+
       <br>
+
       <label class="control-label" for="projeto_id">Selecione o responsável</label>
+
       <select name="responsavel_id" label="Selecione o respons'vel" class="form-control placeholder">
           <option selected disabled value="">Selecione um responsável...</option>
           @for(responsavel <- responsaveis) {
               <option value="@responsavel.getId()">@responsavel.getNome()</option>
           }
       </select>
+
       <br>
+
 	  <label class="control-label" for="tipoTarefa_id">Selecione o tipo</label>
+
 	  <select name="tipoTarefa_id" label="Selecione o tipo" class="form-control placeholder">
 		  <option selected disabled value="">Selecione um tipo...</option>
 		  @for(tipo <- tipos) {
 			  <option value="@tipo.getId()">@tipo.getNome()</option>
 		  }
 	  </select>
+
       <br>
 
   	@b3.submit('class -> "btn btn-primary") { Cadastrar }
 
-          <!-- Modal -->
+      <!-- Modal -->
       <div id="myModal" class="modal fade" role="dialog">
           <div class="modal-dialog">
                   <!-- Modal content-->
               <div class="modal-content">
                   <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Título do modal</h4>
+                      <h4 class="modal-title">Cadastro de Projeto</h4>
                   </div>
                   <div class="modal-body">
-                      <p>Entre com o conteudo deste modal.</p>
                       @formularioDeNovoProjeto(form, clientes)
                   </div>
                   <div class="modal-footer">

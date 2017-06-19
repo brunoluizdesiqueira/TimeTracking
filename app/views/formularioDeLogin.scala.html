@@ -5,6 +5,7 @@
         <h1>Login</h1>
         @b3.email( formulario("email"), '_label -> "Email", 'autocomplete -> false )
         @b3.password( formulario("senha"), '_label -> "Senha", 'autocomplete -> false )
+        @b3.checkbox( formulario("lembrar"), '_text -> "Lembre-me", 'value -> true )
         @b3.submit('class -> "btn btn-primary") { Entrar }
     }
 }
