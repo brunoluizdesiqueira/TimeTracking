@@ -1,37 +1,31 @@
 @(formulario: Form[Projeto], clientes: List[Cliente])
+
+@import helper._
+
 @import b3.vertical.fieldConstructor;
-@main("teste"){
-    <Form id = "formulario" action = "@routes.ProjetoController.salvaNovoProjeto" method = "POST" onsubmit = "submitForm(); return false;">
-        @b3.text(formulario("nome"), '_label -> "Nome", 'placeholder -> "Emissor de nota fiscal eletrônica...")
-        @b3.textarea(formulario("descricao"), '_label -> "Descrição", 'placeholder -> "Criação do aplicativo de emissão de NF-e...")
 
-        <label class="control-label" for="cliente_id">Cliente</label>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    </head>
+    <body>
+        <Form id = "formulario" action = "@routes.ProjetoController.salvaNovoProjeto" method = "POST" onsubmit = "submitForm(); return false;">
+            @b3.text(formulario("nome"), '_label -> "Nome", 'placeholder -> "Emissor de nota fiscal eletrônica...")
+            @b3.textarea(formulario("descricao"), '_label -> "Descrição", 'placeholder -> "Criação do aplicativo de emissão de NF-e...")
 
-        <select name="cliente_id" label="Cliente" class="form-control placeholder">
-            <option selected disabled value="">Selecione um cliente...</option>
-            @for(cliente <- clientes) {
-                <option value="@cliente.getId()">@cliente.getNome()</option>
-            }
-        </select>
+            <label class="control-label" for="cliente_id">Cliente</label>
 
-        <br>
-        @b3.submit('class -> "btn btn-primary") { Cadastrar }
-    </form>
-    <script type="text/javascript">
-            function submitForm() {
-                $.ajax({
-                    url: jQuery("#formulario").attr("action"),
-                    type: jQuery("#formulario").attr("method"),
-                    data: jQuery("#formulario").serialize(),
-                    statusCode: {
-                        201: (function () {
-                            alert("Record was created, you can close the modal");
-                        }),
-                        400: (function () {
-                            alert("hmmm badRequest...");
-                        })
-                    }
-                });
-            }
-        </script>
-}
+            <select name="cliente_id" label="Cliente" class="form-control placeholder">
+                <option selected disabled value="">Selecione um cliente...</option>
+                @for(cliente <- clientes) {
+                    <option value="@cliente.getId()">@cliente.getNome()</option>
+                }
+            </select>
+            @b3.select(formulario("cliente.id",
+                options("liente")))
+
+            <br>
+            @b3.submit('class -> "btn btn-primary") { Cadastrar }
+        </form>
+    </body>
+</html>

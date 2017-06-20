@@ -19,7 +19,7 @@ public class Projeto extends Model {
 	private String descricao;
 	@OneToMany(mappedBy = "projeto")
 	private List<Tarefa> tarefas;
-	@OneToOne
+	@ManyToOne
 	private Cliente cliente;
 
 	public long getId() {
