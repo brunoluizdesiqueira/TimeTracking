@@ -4,28 +4,32 @@
 
 @import b3.vertical.fieldConstructor;
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-    </head>
-    <body>
-        <Form id = "formulario" action = "@routes.ProjetoController.salvaNovoProjeto" method = "POST" onsubmit = "submitForm(); return false;">
-            @b3.text(formulario("nome"), '_label -> "Nome", 'placeholder -> "Emissor de nota fiscal eletrônica...")
-            @b3.textarea(formulario("descricao"), '_label -> "Descrição", 'placeholder -> "Criação do aplicativo de emissão de NF-e...")
+  @main("") {
+    <Form id = "formulario" action = "@routes.ProjetoController.salvaNovoProjeto" method = "POST"
+        onsubmit = "submitForm(); return false;">
 
-            <label class="control-label" for="cliente_id">Cliente</label>
+        @b3.text(
+            formulario("nome"),
+            '_label -> "Nome",
+            'placeholder -> "Emissor de nota fiscal eletrônica..."
+        )
 
-            <select name="cliente_id" label="Cliente" class="form-control placeholder">
-                <option selected disabled value="">Selecione um cliente...</option>
-                @for(cliente <- clientes) {
-                    <option value="@cliente.getId()">@cliente.getNome()</option>
-                }
-            </select>
-            @b3.select(formulario("cliente.id",
-                options("liente")))
+        @b3.textarea(
+            formulario("descricao"),
+            '_label -> "Descrição",
+            'placeholder -> "Criação do aplicativo de emissão de NF-e..."
+        )
 
-            <br>
-            @b3.submit('class -> "btn btn-primary") { Cadastrar }
-        </form>
-    </body>
-</html>
+        @b3.select(
+              formulario("cliente.id"),
+              options(Cliente.options),
+              '_label -> "Cliente", '_default -> "Selecione o cliente...",
+              '_showConstraints -> false
+        )
+
+        <br>
+
+        @b3.submit('class -> "btn btn-primary") { Cadastrar }
+
+    </Form>
+  }

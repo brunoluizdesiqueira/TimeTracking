@@ -1,12 +1,14 @@
 package controllers;
 
-import javax.inject.Inject;
 import models.Cliente;
 import play.data.Form;
 import play.data.FormFactory;
-import play.mvc.*;
+import play.mvc.Controller;
+import play.mvc.Result;
 import validadores.ValidadorDeCliente;
-import views.html.*;
+import views.html.formularioDeNovoCliente;
+
+import javax.inject.Inject;
 public class ClienteController extends Controller {
 
 @Inject
@@ -18,6 +20,7 @@ private ValidadorDeCliente validadorDeCliente;
         Form<Cliente> formulario = formularios.form(Cliente.class);
 		return ok(formularioDeNovoCliente.render(formulario));
     }
+
     public Result salvaNovoCliente() {
         Form<Cliente> formulario = formularios.form(Cliente.class).bindFromRequest();
 

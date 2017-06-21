@@ -57,6 +57,6 @@ public class ProjetoController extends Controller {
 
         projeto.save();
         flash("success", "Gravado com sucesso!");
-        return redirect(routes.TarefaController.formularioDeNovaTarefa());
+        return ok();
     }
 }
