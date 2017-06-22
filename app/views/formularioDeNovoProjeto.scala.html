@@ -4,32 +4,31 @@
 
 @import b3.vertical.fieldConstructor;
 
-  @main("") {
-    <Form id = "formulario" action = "@routes.ProjetoController.salvaNovoProjeto" method = "POST"
-        onsubmit = "submitForm(); return false;">
+<Form id = "form_Projeto" action = "@routes.ProjetoController.salvaNovoProjeto" method = "POST"
+    onsubmit = "submitForm(); return false;">
 
-        @b3.text(
-            formulario("nome"),
-            '_label -> "Nome",
-            'placeholder -> "Emissor de nota fiscal eletrônica..."
-        )
+    @b3.text(
+        formulario("nome"),
+        'id -> "novovalor",
+        '_label -> "Nome",
+        'placeholder -> "Emissor de nota fiscal eletrônica..."
+    )
 
-        @b3.textarea(
-            formulario("descricao"),
-            '_label -> "Descrição",
-            'placeholder -> "Criação do aplicativo de emissão de NF-e..."
-        )
+    @b3.textarea(
+        formulario("descricao"),
+        '_label -> "Descrição",
+        'placeholder -> "Criação do aplicativo de emissão de NF-e..."
+    )
 
-        @b3.select(
-              formulario("cliente.id"),
-              options(Cliente.options),
-              '_label -> "Cliente", '_default -> "Selecione o cliente...",
-              '_showConstraints -> false
-        )
+    @b3.select(
+          formulario("cliente.id"),
+          options(Cliente.options),
+          '_label -> "Cliente", '_default -> "Selecione o cliente...",
+          '_showConstraints -> false
+    )
 
-        <br>
+    <br>
 
-        @b3.submit('class -> "btn btn-primary") { Cadastrar }
+    @b3.submit('class -> "btn btn-primary") { Cadastrar }
 
-    </Form>
-  }
+</Form>

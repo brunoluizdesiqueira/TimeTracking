@@ -3,9 +3,9 @@
  */
 function submitForm() {
     $.ajax({
-        url: jQuery("#formulario").attr("action"),
-        type: jQuery("#formulario").attr("method"),
-        data: jQuery("#formulario").serialize(),
+        url: jQuery("#form_Projeto").attr("action"),
+        type: jQuery("#form_Projeto").attr("method"),
+        data: jQuery("#form_Projeto").serialize(),
         statusCode: {
             201: (function () {
                 alert("Record was created, you can close the modal");
@@ -16,3 +16,9 @@ function submitForm() {
         }
     });
 }
+
+$("#modalProjeto").on("hidden.bs.modal", function () {
+    var new_val = $('#novovalor').val();
+    $('#projeto_id').append('<option selected>' +new_val+ '</option>');
+    $('#opt-remove').remove();
+});

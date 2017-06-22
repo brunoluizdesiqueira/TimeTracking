@@ -9,7 +9,8 @@
       <div class="form-group">
           <label class="control-label" for="projeto_id">Selecione o projeto</label>
           <div class="input-group">
-              <select name="projeto_id" label="Selecione o projeto" class="form-control placeholder">
+              <select name="projeto_id" id="projeto_id" label="Selecione o projeto" class="form-control placeholder">
+
                   <option selected disabled value="">Selecione um projeto...</option>
                   @for(projeto <- projetos) {
                       <option value="@projeto.getId()">@projeto.getNome()</option>
@@ -17,7 +18,7 @@
               </select>
 
               <span class="input-group-btn">
-                  <a href="" class="btn btn-primary" data-toggle="modal" data-target="#myModal" value="Cadastrar" >
+                  <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalProjeto" value="Cadastrar" >
                       <span class="glyphicon glyphicon-new-window"></span>
                   </a>
               </span>
@@ -28,7 +29,7 @@
 
       <label class="control-label" for="projeto_id">Selecione o responsável</label>
 
-      <select name="responsavel_id" label="Selecione o respons'vel" class="form-control placeholder">
+      <select name="responsavel_id" label="Selecione o responsável" class="form-control placeholder">
           <option selected disabled value="">Selecione um responsável...</option>
           @for(responsavel <- responsaveis) {
               <option value="@responsavel.getId()">@responsavel.getNome()</option>
@@ -50,23 +51,24 @@
 
   	@b3.submit('class -> "btn btn-primary") { Cadastrar }
 
-      <!-- Modal -->
-      <div id="myModal" class="modal fade" role="dialog">
-          <div class="modal-dialog">
-                  <!-- Modal content-->
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">Cadastro de Projeto</h4>
-                  </div>
-                  <div class="modal-body">
-                      @formularioDeNovoProjeto(form, clientes)
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                  </div>
-              </div>
-          </div>
-      </div>
   }
+        <!-- Modal -->
+    <div id="modalProjeto" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+                <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Cadastro de Projeto</h4>
+                </div>
+                <div class="modal-body">
+                  @formularioDeNovoProjeto(form, clientes)
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 } 
