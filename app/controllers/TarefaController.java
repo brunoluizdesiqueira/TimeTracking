@@ -63,7 +63,7 @@ public class TarefaController extends Controller {
         String tipoTarefa_id = formulario.field("tipoTarefa_id").valueOr("");
 
         if (tipoTarefa_id.isEmpty()) {
-            formulario.reject("Cadastre um tipo der tarefa!");
+            formulario.reject("Cadastre um tipo da tarefa!");
         }
         else {
 
@@ -75,7 +75,21 @@ public class TarefaController extends Controller {
             }
         }
 
-        tarefa.save();        
+        String projeto_id = formulario.field("projeto_id").valueOr("");
+
+        if (projeto_id.isEmpty()) {
+            formulario.reject("O projeto não foi encontrado!");
+        } else {
+            Optional<Projeto> projetoSelecionado = projetoDAO.comId(Long.parseLong(projeto_id));
+
+            if (projetoSelecionado.isPresent()) {
+                Projeto projeto = projetoSelecionado.get();
+                tarefa.setProjeto(projeto);
+            }
+        }
+
+        tarefa.save();
+
         return redirect(routes.TarefaController.formularioDeNovaTarefa());
     }
 

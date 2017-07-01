@@ -34,10 +34,10 @@ public class Usuario extends Model{
 	private List<RegistroDeAcesso> acessos;
 	@Enumerated(EnumType.STRING)
     private Papel papel = Papel.COLABORADOR;
-	@OneToOne(mappedBy = "responsavel")
-	private Tarefa tarefa_responsavel;
-	@OneToOne(mappedBy = "membro")
-	private Tarefa tarefa_Membro;
+	@OneToMany(mappedBy = "responsavel")
+	private List<Tarefa> tarefa_responsaveis;
+	@OneToMany(mappedBy = "membro")
+	private List<Tarefa> tarefa_Membros;
 	@OneToOne(mappedBy = "usuarioParecer")
 	private TimeLine timeLine;
 
@@ -77,18 +77,7 @@ public class Usuario extends Model{
 	public long getId() {
 		return id;
 	}
-	public Tarefa getTarefa_responsavel() {
-		return tarefa_responsavel;
-	}
-	public void setTarefa_responsavel(Tarefa tarefa_responsavel) {
-		this.tarefa_responsavel = tarefa_responsavel;
-	}
-	public Tarefa getTarefa_Membro() {
-		return tarefa_Membro;
-	}
-	public void setTarefa_Membro(Tarefa tarefa_Membro) {
-		this.tarefa_Membro = tarefa_Membro;
-	}
+
 	public TimeLine getTimeLine() {
 		return timeLine;
 	}
@@ -124,7 +113,22 @@ public class Usuario extends Model{
 	}
 	public void setAvatarURL(String avatarURL) {
 		AvatarURL = avatarURL;
-	}	
-	
+	}
+
+	public List<Tarefa> getTarefa_responsaveis() {
+		return tarefa_responsaveis;
+	}
+
+	public void setTarefa_responsaveis(List<Tarefa> tarefa_responsaveis) {
+		this.tarefa_responsaveis = tarefa_responsaveis;
+	}
+
+	public List<Tarefa> getTarefa_Membros() {
+		return tarefa_Membros;
+	}
+
+	public void setTarefa_Membros(List<Tarefa> tarefa_Membros) {
+		this.tarefa_Membros = tarefa_Membros;
+	}
 }
 

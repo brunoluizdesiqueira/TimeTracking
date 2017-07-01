@@ -1,28 +1,56 @@
-@(formulario: Form[Tarefa], form: Form[Projeto], clientes: List[Cliente], tipos: List[TipoTarefa], projetos: List[Projeto], responsaveis: List[Usuario], membros: List[Usuario])
+@(formulario: Form[Tarefa],
+        formProjeto: Form[Projeto],
+        clientes: List[Cliente],
+        tipos: List[TipoTarefa],
+        projetos: List[Projeto],
+        responsaveis: List[Usuario],
+        membros: List[Usuario]
+)
+
+@import helper._
+
 @import b3.vertical.fieldConstructor;
+
 @main("Cadastro de tarefa") {
   @b3.form(routes.TarefaController.salvaNovaTarefa) {
   	<h1>Cadastre uma nova tarefa</h1>
-  	  @b3.text(formulario("titulo"),'_label -> "Título", 'placeholder -> "Criação binding do XSD da NF-e 4.0")
-	  @b3.textarea(formulario("descricao"),'_label -> "Descrição", 'placeholder -> "Descreva o que devera ser realizado através desta tarefa.")
+
+      @b3.text(formulario("titulo"),'_label -> "Título", 'placeholder -> "Criação binding do XSD da NF-e 4.0")
+      @b3.textarea(formulario("descricao"),
+            '_label -> "Descrição",
+            'placeholder -> "Descreva o que devera ser realizado através desta tarefa."
+      )
 
       <div class="form-group">
-          <label class="control-label" for="projeto_id">Selecione o projeto</label>
-          <div class="input-group">
-              <select name="projeto_id" id="projeto_id" label="Selecione o projeto" class="form-control placeholder">
+          <label class="control-label">Selecione o projeto</label>
+          <div class="form-inline">
+              @b3.select(
+                  formulario("projeto.id"),
+                  options(Projeto.options),
+                  '_default -> "Selecione o projeto...",
+                  '_showConstraints -> false
+              )
 
-                  <option selected disabled value="">Selecione um projeto...</option>
-                  @for(projeto <- projetos) {
-                      <option value="@projeto.getId()">@projeto.getNome()</option>
-                  }
-              </select>
-
-              <span class="input-group-btn">
-                  <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalProjeto" value="Cadastrar" >
-                      <span class="glyphicon glyphicon-new-window"></span>
-                  </a>
-              </span>
+              @b3.button('class -> "btn btn-primary", 'for -> "produto_id") { ... }
           </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="projeto_id">Selecione o projeto</label>
+        <div class="input-group">
+            @b3.select(
+                formulario("projeto.id"),
+                options(Projeto.options),
+                '_default -> "Selecione o projeto...",
+                '_showConstraints -> false
+            )
+
+            <span class="input-group-btn">
+                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalProjeto" value="Cadastrar" for="projeto_id" >
+                    <span class="glyphicon glyphicon-new-window"></span>
+                </a>
+            </span>
+        </div>
       </div>
 
       <br>
@@ -62,7 +90,7 @@
                     <h4 class="modal-title">Cadastro de Projeto</h4>
                 </div>
                 <div class="modal-body">
-                  @formularioDeNovoProjeto(form, clientes)
+                  @formularioDeNovoProjeto(formProjeto, clientes)
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

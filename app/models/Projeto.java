@@ -5,7 +5,9 @@ import play.data.validation.Constraints.Required;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Projeto extends Model {
@@ -21,6 +23,11 @@ public class Projeto extends Model {
 	private List<Tarefa> tarefas;
 	@ManyToOne
 	private Cliente cliente;
+
+	/**
+	 * Generic query helper para entidade Projeto with id Long
+	 */
+	public static Finder<Long, Projeto> projetos = new Finder<>(Projeto.class);
 
 	public long getId() {
 		return id;
@@ -64,5 +71,15 @@ public class Projeto extends Model {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+
+	public static Map<String,String> options() {
+
+		LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
+
+		for(Projeto p: projetos.orderBy("nome").findList()) {
+			Long id = p.getId();
+			options.put(id.toString(), p.getNome());
+		}
+		return options;
+	}
 }

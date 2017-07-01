@@ -21,4 +21,15 @@ $("#modalProjeto").on("hidden.bs.modal", function () {
     var new_val = $('#novovalor').val();
     $('#projeto_id').append('<option selected>' +new_val+ '</option>');
     $('#opt-remove').remove();
+});""
+
+var myOptions = {
+    val1 : 'text1',
+    val2 : 'text2'
+};
+var mySelect = $('#mySelect');
+$.each(myOptions, function(val, text) {
+    mySelect.append(
+        $('<option></option>').val(val).html(text)
+    );
 });

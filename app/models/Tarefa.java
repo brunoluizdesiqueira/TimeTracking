@@ -16,12 +16,13 @@ public class Tarefa extends Model{
     private String titulo;
 	@Required(message = "Você precisa fornecer a descrição da tarefa!")
 	private String descricao;
-	@OneToOne
+	@ManyToOne
 	private TipoTarefa tipo;
-	@OneToOne
+	@ManyToOne
 	private Usuario responsavel;
-	@OneToOne
+	@ManyToOne
 	private Usuario membro;
+
 	private LocalDate criacao = LocalDate.now();
 	@OneToOne
 	private TimeTracking timeTracking;

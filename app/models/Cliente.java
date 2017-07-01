@@ -15,11 +15,15 @@ public class Cliente extends Model{
 	@Id
 	@GeneratedValue
 	private long id;
+
 	@Required(message = "Você precisa fornecer um nome!")
 	private String nome;
+
 	private LocalDate dataCadastro = LocalDate.now();
+
 	@Enumerated(EnumType.STRING)
 	private Status status = Status.ATIVO;
+
 	@OneToMany(mappedBy = "cliente")
 	private List<Projeto> projetos;
 

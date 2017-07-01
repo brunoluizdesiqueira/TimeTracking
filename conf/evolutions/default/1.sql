@@ -45,9 +45,6 @@ create table tarefa (
   criacao                       date,
   time_tracking_id              bigint,
   projeto_id                    bigint,
-  constraint uq_tarefa_tipo_id unique (tipo_id),
-  constraint uq_tarefa_responsavel_id unique (responsavel_id),
-  constraint uq_tarefa_membro_id unique (membro_id),
   constraint uq_tarefa_time_tracking_id unique (time_tracking_id),
   constraint pk_tarefa primary key (id)
 );
@@ -118,10 +115,13 @@ alter table tag add constraint fk_tag_tarefa_id foreign key (tarefa_id) referenc
 create index ix_tag_tarefa_id on tag (tarefa_id);
 
 alter table tarefa add constraint fk_tarefa_tipo_id foreign key (tipo_id) references tipo_tarefa (id) on delete restrict on update restrict;
+create index ix_tarefa_tipo_id on tarefa (tipo_id);
 
 alter table tarefa add constraint fk_tarefa_responsavel_id foreign key (responsavel_id) references usuario (id) on delete restrict on update restrict;
+create index ix_tarefa_responsavel_id on tarefa (responsavel_id);
 
 alter table tarefa add constraint fk_tarefa_membro_id foreign key (membro_id) references usuario (id) on delete restrict on update restrict;
+create index ix_tarefa_membro_id on tarefa (membro_id);
 
 alter table tarefa add constraint fk_tarefa_time_tracking_id foreign key (time_tracking_id) references timetracking (id) on delete restrict on update restrict;
 
@@ -150,10 +150,13 @@ alter table tag drop foreign key fk_tag_tarefa_id;
 drop index ix_tag_tarefa_id on tag;
 
 alter table tarefa drop foreign key fk_tarefa_tipo_id;
+drop index ix_tarefa_tipo_id on tarefa;
 
 alter table tarefa drop foreign key fk_tarefa_responsavel_id;
+drop index ix_tarefa_responsavel_id on tarefa;
 
 alter table tarefa drop foreign key fk_tarefa_membro_id;
+drop index ix_tarefa_membro_id on tarefa;
 
 alter table tarefa drop foreign key fk_tarefa_time_tracking_id;
 
